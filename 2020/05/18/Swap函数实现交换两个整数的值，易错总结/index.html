@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="WangGarrison"><meta name="renderer" content="webkit"><meta name="copyright" content="WangGarrison"><meta name="keywords" content="WangGarrison"><meta name="description" content="天才在左，疯子在右"><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Swap函数实现交换两个整数的值，易错总结 · WangGarrison's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/favicon.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/cat.jpg"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">WangGarrison</div><div class="friends"><div>FRIENDS</div><span><a href="//github.com/WangGarrison" target="_black">GitHub</a></span><span><a href="//blog.csdn.net/huifaguangdemao" target="_black">CSDN</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/1index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">WangGarrison's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">Swap函数实现交换两个整数的值，易错总结</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-05-18</span></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><p>@[TOC]</p>
+<h2 id="一、正确做法"><a href="#一、正确做法" class="headerlink" title="一、正确做法"></a>一、正确做法</h2><p><strong>首先正确的交换方式是如下代码：</strong></p>
+<pre><code class="c">void Swap(int *p1,int *p2)
+{
+    int tmp = *p1;
+    *p1 = *p2;
+    *p2 = tmp;
+}</code></pre>
+<p>用指针直接访问存储两个整数的内存空间，实现交换，下面归纳一下易错的地方</p>
+<h2 id="二、只交换了形参"><a href="#二、只交换了形参" class="headerlink" title="二、只交换了形参"></a>二、只交换了形参</h2><pre><code class="c">void Swap_err(int a,int b)
+{
+    int tmp = a;
+    a = b;
+    b = tmp;
+}</code></pre>
+<p>这种情况，只是交换了Swap函数里a，b的值（即只交换了形参的值），而主函数里的a，b是没有发生改变的，交换失败</p>
+<h2 id="三、只是交换了形参的指向"><a href="#三、只是交换了形参的指向" class="headerlink" title="三、只是交换了形参的指向"></a>三、只是交换了形参的指向</h2><pre><code class="c">void Swap_err2(int *p1,int *p2)
+{
+    int *tmp = p1;
+    p1 = p2;
+    p2 = tmp;
+}</code></pre>
+<p>这种情况看似形参传了引用，但函数体交换的是形参的指向，如下图所示<img src="https://img-blog.csdnimg.cn/20200517220942457.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt=""><br>p1原本指向a，函数把p1指向了b，p2指向了a，交换了这两个形参的指向，但a，b并没有发生交换。<br>可以形象的理解为交换了两个房间的钥匙，房间里的内容并没有交换。</p>
+<h2 id="四、小心野指针"><a href="#四、小心野指针" class="headerlink" title="四、小心野指针"></a>四、小心野指针</h2><pre><code class="c">void Swap_err3(int *p1,int *p2)
+{
+    int *tmp;//野指针,悬挂指针,tmp是个局部变量,默认值为随机值
+    *tmp = *p1;//*tmp崩溃,野指针不能访问
+    *p1 = *p2;
+    *p2 = *tmp;
+}</code></pre>
+<p>这种情况程序会崩溃<br><img src="https://img-blog.csdnimg.cn/20200517221636187.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt=""><br>这里tmp指针没有被初始化，即成为所谓的野指针<br>野指针就是指针指向的位置是不可知的（随机的、不正确的、没有明确限制的），此时去解引用就是去访问了一个不确定的地址，所以结果是不可知的。<br>野指针不同于空指针，空指针是指一个指针的值为null，而野指针的值并不为null，野指针会指向一段实际的内存，只是它指向哪里我们并不知情，所以程序在这里崩溃了。<strong>编程时要小心避免野指针。</strong></p>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><p>交换成功的必要条件:<strong>1.传指针;2.解引用</strong><br>一个函数的改变要想影响另一个函数,必须满足两个条件:<strong>1.传指针;2.解引用</strong> </p>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://wanggarrison.top">WangGarrison</a></p><p> <span>Link:  </span><a href="http://wanggarrison.top/2020/05/18/Swap%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0%E7%9A%84%E5%80%BC%EF%BC%8C%E6%98%93%E9%94%99%E6%80%BB%E7%BB%93/">http://wanggarrison.top/2020/05/18/Swap%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0%E7%9A%84%E5%80%BC%EF%BC%8C%E6%98%93%E9%94%99%E6%80%BB%E7%BB%93/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="nextSlogan" href="/2020/05/17/Github%E4%B8%8Ehexo%E6%90%AD%E5%BB%BA%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%9B%B4%E6%96%B0%E5%90%8E%E6%98%BE%E7%A4%BA404/" title="Github与hexo搭建的个人博客网站更新后显示404"><span>NextPost ></span><br><span class="nextTitle">Github与hexo搭建的个人博客网站更新后显示404</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>© 2020 </span><a href="https://github.com/WangGarrison" target="_blank" rel="noopener"><span>Wang Jiaxin</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、正确做法"><span class="toc-number">1.</span> <span class="toc-text">一、正确做法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、只交换了形参"><span class="toc-number">2.</span> <span class="toc-text">二、只交换了形参</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、只是交换了形参的指向"><span class="toc-number">3.</span> <span class="toc-text">三、只是交换了形参的指向</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、小心野指针"><span class="toc-number">4.</span> <span class="toc-text">四、小心野指针</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#五、总结"><span class="toc-number">5.</span> <span class="toc-text">五、总结</span></a></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
