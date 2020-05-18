@@ -97,50 +97,17 @@
   }
 }( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script><meta name="generator" content="Hexo 4.2.1"></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/cat.jpg"></div><!--.profile-saying
   i.fa.fa-comment
-  .saying--><div class="cxo-profile-inner"><div class="profile-name">WangGarrison</div><div class="friends"><div>FRIENDS</div><span><a href="//github.com/WangGarrison" target="_black">GitHub</a></span><span><a href="//blog.csdn.net/huifaguangdemao" target="_black">CSDN</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/1index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">WangGarrison's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">求整数位数，以及顺序与逆序输出各位数字</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-05-17</span></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h2 id="题目背景：给一个正整数，-1-求它的位数，2-逆序输出每一位数字，3顺序输出每一位数字"><a href="#题目背景：给一个正整数，-1-求它的位数，2-逆序输出每一位数字，3顺序输出每一位数字" class="headerlink" title="题目背景：给一个正整数， 1.求它的位数，2.逆序输出每一位数字，3顺序输出每一位数字"></a>题目背景：给一个正整数， 1.求它的位数，2.逆序输出每一位数字，3顺序输出每一位数字</h2><p><strong>1求位数，</strong><br>算法: 每次丢弃个位数字,计数器++,直到n为0<br>与我们用眼睛去数类似，即不断给该整数除以十，计数，此处要考虑当给的整数位0时的特殊情况，C代码如下：</p>
-<pre><code class="c">int Count(long long n) 
-{
-    if(n == 0)
-        return 1;
-    int tmp = 0;
-    while(n != 0)
-    {
-        tmp++;
-        n /= 10;
-    }
-    return tmp;
-}</code></pre>
-<p><strong>2.逆序输出</strong><br>算法：求出低位，输出低位，再丢弃低位，重复执行直到n为0<br>这里关键是求低位的算法，用除十取余来得到低位    ，C代码如下：</p>
-<pre><code class="c">void ReverseOutput(int n)
-{
-    if(n == 0)
-    {
-        printf(&quot;0\n&quot;);
-        return;//提前结束该函数
-    }
-    else if(n &lt; 0)
-    {
-        printf(&quot;-&quot;);
-        n = -n;
-    }
-
-    while(n != 0)
-    {
-        printf(&quot;%d &quot;,n%10);
-        n /= 10;
-    }
-    printf(&quot;\n&quot;);
-}</code></pre>
-<p><strong>3.顺序输出</strong><br>算法:得到高位,输出高位,丢弃高位,直到n为0，<br>这里关键是得到高位的算法，C代码如下：</p>
-<pre><code class="c">void OrderOutput(int n)
-{
-    int tmp = Count(n); //得到n是几位数字
-    int power = (int)pow(10.0, tmp - 1);//获得高位
-    for (int i = 0; i &lt; tmp; i++)
-    {
-        printf(&quot;%d &quot;, n / power);//输出最高位
-        n %= power;//丢弃最高位
-        power /= 10;
-    }
-}</code></pre>
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">WangGarrison</div><div class="friends"><div>FRIENDS</div><span><a href="//github.com/WangGarrison" target="_black">GitHub</a></span><span><a href="//blog.csdn.net/huifaguangdemao" target="_black">CSDN</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/1index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">WangGarrison's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">求整数位数，以及顺序与逆序输出各位数字</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-05-17</span></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h2 id="题目背景：给一个正整数，-1-求它的位数，2-逆序输出每一位数字，3顺序输出每一位数字">题目背景：给一个正整数， 1.求它的位数，2.逆序输出每一位数字，3顺序输出每一位数字</h2>
+<p><strong>1求位数，</strong><br>
+算法: 每次丢弃个位数字,计数器++,直到n为0<br>
+与我们用眼睛去数类似，即不断给该整数除以十，计数，此处要考虑当给的整数位0时的特殊情况，C代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Count</span><span class="hljs-params">(<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> n)</span> </span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>)<br>		<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>	<span class="hljs-keyword">int</span> tmp = <span class="hljs-number">0</span>;<br>	<span class="hljs-keyword">while</span>(n != <span class="hljs-number">0</span>)<br>	&#123;<br>		tmp++;<br>		n /= <span class="hljs-number">10</span>;<br>	&#125;<br>	<span class="hljs-keyword">return</span> tmp;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>2.逆序输出</strong><br>
+算法：求出低位，输出低位，再丢弃低位，重复执行直到n为0<br>
+这里关键是求低位的算法，用除十取余来得到低位	，C代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ReverseOutput</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"0\n"</span>);<br>		<span class="hljs-keyword">return</span>;<span class="hljs-comment">//提前结束该函数</span><br>	&#125;<br>	<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(n &lt; <span class="hljs-number">0</span>)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"-"</span>);<br>		n = -n;<br>	&#125;<br><br>	<span class="hljs-keyword">while</span>(n != <span class="hljs-number">0</span>)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,n%<span class="hljs-number">10</span>);<br>		n /= <span class="hljs-number">10</span>;<br>	&#125;<br>	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p><strong>3.顺序输出</strong><br>
+算法:得到高位,输出高位,丢弃高位,直到n为0，<br>
+这里关键是得到高位的算法，C代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OrderOutput</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br>	<span class="hljs-keyword">int</span> tmp = Count(n); <span class="hljs-comment">//得到n是几位数字</span><br>	<span class="hljs-keyword">int</span> power = (<span class="hljs-keyword">int</span>)<span class="hljs-built_in">pow</span>(<span class="hljs-number">10.0</span>, tmp - <span class="hljs-number">1</span>);<span class="hljs-comment">//获得高位</span><br>	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; tmp; i++)<br>	&#123;<br>		<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, n / power);<span class="hljs-comment">//输出最高位</span><br>		n %= power;<span class="hljs-comment">//丢弃最高位</span><br>		power /= <span class="hljs-number">10</span>;<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 </article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://wanggarrison.top">WangGarrison</a></p><p> <span>Link:  </span><a href="http://wanggarrison.top/2020/05/17/%E6%B1%82%E6%95%B4%E6%95%B0%E4%BD%8D%E6%95%B0%EF%BC%8C%E4%BB%A5%E5%8F%8A%E9%A1%BA%E5%BA%8F%E4%B8%8E%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97/">http://wanggarrison.top/2020/05/17/%E6%B1%82%E6%95%B4%E6%95%B0%E4%BD%8D%E6%95%B0%EF%BC%8C%E4%BB%A5%E5%8F%8A%E9%A1%BA%E5%BA%8F%E4%B8%8E%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="prevSlogan" href="/2020/05/17/Github%E4%B8%8Ehexo%E6%90%AD%E5%BB%BA%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%9B%B4%E6%96%B0%E5%90%8E%E6%98%BE%E7%A4%BA404/" title="Github与hexo搭建的个人博客网站更新后显示404"><span>< PreviousPost</span><br><span class="prevTitle">Github与hexo搭建的个人博客网站更新后显示404</span></a><a class="nextSlogan" href="/2020/05/17/OneNote%20for%20win10%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%9F%A5%E7%9C%8B/" title="OneNote for win10本地存储文件的备份与查看"><span>NextPost ></span><br><span class="nextTitle">OneNote for win10本地存储文件的备份与查看</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>© 2020 </span><a href="https://github.com/WangGarrison" target="_blank" rel="noopener"><span>Wang Jiaxin</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#题目背景：给一个正整数，-1-求它的位数，2-逆序输出每一位数字，3顺序输出每一位数字"><span class="toc-number">1.</span> <span class="toc-text">题目背景：给一个正整数， 1.求它的位数，2.逆序输出每一位数字，3顺序输出每一位数字</span></a></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
