@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Swap函数实现交换两个整数的值，易错总结</title>
+      <link href="/2020/05/17/Swap%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0%E7%9A%84%E5%80%BC%EF%BC%8C%E6%98%93%E9%94%99%E6%80%BB%E7%BB%93/"/>
+      <url>/2020/05/17/Swap%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0%E7%9A%84%E5%80%BC%EF%BC%8C%E6%98%93%E9%94%99%E6%80%BB%E7%BB%93/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、正确做法">一、正确做法</h2><p><strong>首先正确的交换方式是如下代码：</strong></p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Swap</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *p1,<span class="hljs-keyword">int</span> *p2)</span></span><br><span class="hljs-function"></span>&#123;<br><span class="hljs-keyword">int</span> tmp = *p1;<br>*p1 = *p2;<br>*p2 = tmp;<br>&#125;<br></code></pre></td></tr></table></figure><p>用指针直接访问存储两个整数的内存空间，实现交换，下面归纳一下易错的地方</p><h2 id="二、只交换了形参">二、只交换了形参</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Swap_err</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a,<span class="hljs-keyword">int</span> b)</span></span><br><span class="hljs-function"></span>&#123;<br><span class="hljs-keyword">int</span> tmp = a;<br>a = b;<br>b = tmp;<br>&#125;<br></code></pre></td></tr></table></figure><p>这种情况，只是交换了Swap函数里a，b的值（即只交换了形参的值），而主函数里的a，b是没有发生改变的，交换失败</p><h2 id="三、只是交换了形参的指向">三、只是交换了形参的指向</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Swap_err2</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *p1,<span class="hljs-keyword">int</span> *p2)</span></span><br><span class="hljs-function"></span>&#123;<br><span class="hljs-keyword">int</span> *tmp = p1;<br>p1 = p2;<br>p2 = tmp;<br>&#125;<br></code></pre></td></tr></table></figure><p>这种情况看似形参传了引用，但函数体交换的是形参的指向，如下图所示<img src="https://img-blog.csdnimg.cn/20200517220942457.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt=""><br>p1原本指向a，函数把p1指向了b，p2指向了a，交换了这两个形参的指向，但a，b并没有发生交换。<br>可以形象的理解为交换了两个房间的钥匙，房间里的内容并没有交换。</p><h2 id="四、小心野指针">四、小心野指针</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Swap_err3</span><span class="hljs-params">(<span class="hljs-keyword">int</span> *p1,<span class="hljs-keyword">int</span> *p2)</span></span><br><span class="hljs-function"></span>&#123;<br><span class="hljs-keyword">int</span> *tmp;<span class="hljs-comment">//野指针,悬挂指针,tmp是个局部变量,默认值为随机值</span><br>*tmp = *p1;<span class="hljs-comment">//*tmp崩溃,野指针不能访问</span><br>*p1 = *p2;<br>*p2 = *tmp;<br>&#125;<br></code></pre></td></tr></table></figure><p>这种情况程序会崩溃<br><img src="https://img-blog.csdnimg.cn/20200517221636187.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt=""><br>这里tmp指针没有被初始化，即成为所谓的野指针<br>野指针就是指针指向的位置是不可知的（随机的、不正确的、没有明确限制的），此时去解引用就是去访问了一个不确定的地址，所以结果是不可知的。<br>野指针不同于空指针，空指针是指一个指针的值为null，而野指针的值并不为null，野指针会指向一段实际的内存，只是它指向哪里我们并不知情，所以程序在这里崩溃了。<strong>编程时要小心避免野指针。</strong></p><h2 id="五、总结">五、总结</h2><p>交换成功的必要条件:<strong>1.传指针;2.解引用</strong><br>一个函数的改变要想影响另一个函数,必须满足两个条件:<strong>1.传指针;2.解引用</strong></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> C语言 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Github与hexo搭建的个人博客网站更新后显示404</title>
+      <link href="/2020/05/17/Github%E4%B8%8Ehexo%E6%90%AD%E5%BB%BA%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%9B%B4%E6%96%B0%E5%90%8E%E6%98%BE%E7%A4%BA404/"/>
+      <url>/2020/05/17/Github%E4%B8%8Ehexo%E6%90%AD%E5%BB%BA%E7%9A%84%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2%E7%BD%91%E7%AB%99%E6%9B%B4%E6%96%B0%E5%90%8E%E6%98%BE%E7%A4%BA404/</url>
+      
+        <content type="html"><![CDATA[<p>更新博客后<br>hexo s 本地显示正常，但是hexo d提交线上后，用域名打开显示404</p><p><strong>解决办法</strong></p><p>hexo d后，登录Github找到自己博客的仓库，<br>点击settings<br><img src="https://img-blog.csdnimg.cn/20200516195546338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="Github settings"><br>拉到底部将自己的域名填入，（虽然之前填过，但更新后有时要再填一次）<br><img src="https://img-blog.csdnimg.cn/20200516195808997.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="custom domain"><br>然后再点击rename，（虽然这没改动，但仍要点击一次）<br><img src="https://img-blog.csdnimg.cn/20200516195939782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="click rename"><br>操作完之后就可以用域名打开网站了</p><p><img src="https://img-blog.csdnimg.cn/20200516200508342.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt=""></p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>OneNote-for-win10本地存储文件的备份与查看</title>
+      <link href="/2020/05/17/OneNote-for-win10%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%9F%A5%E7%9C%8B/"/>
+      <url>/2020/05/17/OneNote-for-win10%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8%E6%96%87%E4%BB%B6%E7%9A%84%E5%A4%87%E4%BB%BD%E4%B8%8E%E6%9F%A5%E7%9C%8B/</url>
+      
+        <content type="html"><![CDATA[<p>今天win10预装的OneNote突然卡在了打开笔记本页面，一番重启之后无解，准备重装又担心之前的数据没有上传到云，于是手动备份。</p><p>OneNote本地存储的文件在C:\Users\wi\AppData\Local\Packages\Microsoft.Office.OneNote_8wekyb3d8bbwe\LocalState\AppData\Local\OneNote\16.0\AccessibilityCheckerIndex<br>该目录下成对出现的文件即为自己的笔记本，这些数据库文件为sqlite格式的db文件。使用SQLLiteSpy可以查看这些文件。<br>下载SQLLite数据库管理工具SQLLiteSpy<a href="http://www.winportal.com/sqlitespy" target="_blank" rel="noopener">下载地址</a>。<br>下载成功后解压缩，找到exe文件直接运行，在可视化窗口使用快捷键ctrl+F11打开数据库文件。使用该工具即可查看自己OneNote笔记本的数据结构。<br><img src="https://img-blog.csdnimg.cn/2020042609235772.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="SQLLite界面"><br>重装OneNote之前备份数据库文件，这样就不用担心数据的丢失了。</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>查找两数之和</title>
+      <link href="/2020/05/16/%E6%9F%A5%E6%89%BE%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/"/>
+      <url>/2020/05/16/%E6%9F%A5%E6%89%BE%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</url>
+      
+        <content type="html"><![CDATA[<h2 id="查找两数之和">查找两数之和</h2><p><strong><strong>Leetcode刷题笔记</strong></strong><br>给定一个整数数组 nums 和一个目标值 target，请你在该数组中找出和为目标值的那 两个 整数，并返回他们的数组下标。</p><p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。</p><p>示例:</p><p>给定 nums = [2, 7, 11, 15], target = 9</p><p>因为 nums[0] + nums[1] = 2 + 7 = 9<br>所以返回 [0, 1]</p><p>来源：力扣（LeetCode）<br>链接：<a href="https://leetcode-cn.com/problems/two-sum" target="_blank" rel="noopener">https://leetcode-cn.com/problems/two-sum</a></p><p>我的代码</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * Note: The returned array must be malloced, assume caller calls free().</span><br><span class="hljs-comment"> */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span>* <span class="hljs-title">twoSum</span><span class="hljs-params">(<span class="hljs-keyword">int</span>* nums, <span class="hljs-keyword">int</span> numsSize, <span class="hljs-keyword">int</span> target, <span class="hljs-keyword">int</span>* returnSize)</span> </span>&#123;<br><span class="hljs-keyword">int</span> i, j;<br><span class="hljs-keyword">int</span> *p1 = nums;<br>    <span class="hljs-keyword">int</span> *a =(<span class="hljs-keyword">int</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>)*<span class="hljs-number">2</span>);<span class="hljs-comment">//动态分配内存，给a分配2个int的大小//malloc返回分配的首地址</span><br>                                          <br><span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; numsSize - <span class="hljs-number">1</span>; i++)<br><span class="hljs-keyword">for</span> (j = i + <span class="hljs-number">1</span>; j &lt; numsSize; j++) <br>&#123;<br><span class="hljs-keyword">if</span> ((*(p1 + i) + *(p1 + j)) == target) <br>&#123;<br>a[<span class="hljs-number">0</span>] = i; a[<span class="hljs-number">1</span>] = j;<br>                     <br>&#125;<br>&#125;<br>   *returnSize=<span class="hljs-number">2</span>;<br><span class="hljs-keyword">return</span> a;<br>&#125;<br></code></pre></td></tr></table></figure><p>暴力查找，时间复杂度 O(n^2)，本题逻辑较为简单，但要注意题注“The returned array must be malloced”.<br>算法可优化，具体参考leetcode该题讨论区。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> C语言 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>求整数位数，以及顺序与逆序输出各位数字</title>
+      <link href="/2020/05/16/%E6%B1%82%E6%95%B4%E6%95%B0%E4%BD%8D%E6%95%B0%EF%BC%8C%E4%BB%A5%E5%8F%8A%E9%A1%BA%E5%BA%8F%E4%B8%8E%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97/"/>
+      <url>/2020/05/16/%E6%B1%82%E6%95%B4%E6%95%B0%E4%BD%8D%E6%95%B0%EF%BC%8C%E4%BB%A5%E5%8F%8A%E9%A1%BA%E5%BA%8F%E4%B8%8E%E9%80%86%E5%BA%8F%E8%BE%93%E5%87%BA%E5%90%84%E4%BD%8D%E6%95%B0%E5%AD%97/</url>
+      
+        <content type="html"><![CDATA[<h2 id="题目背景：给一个正整数，-1-求它的位数，2-逆序输出每一位数字，3顺序输出每一位数字">题目背景：给一个正整数， 1.求它的位数，2.逆序输出每一位数字，3顺序输出每一位数字</h2><p><strong>1求位数，</strong><br>算法: 每次丢弃个位数字,计数器++,直到n为0<br>与我们用眼睛去数类似，即不断给该整数除以十，计数，此处要考虑当给的整数位0时的特殊情况，C代码如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">Count</span><span class="hljs-params">(<span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> n)</span> </span><br><span class="hljs-function"></span>&#123;<br><span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>)<br><span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br><span class="hljs-keyword">int</span> tmp = <span class="hljs-number">0</span>;<br><span class="hljs-keyword">while</span>(n != <span class="hljs-number">0</span>)<br>&#123;<br>tmp++;<br>n /= <span class="hljs-number">10</span>;<br>&#125;<br><span class="hljs-keyword">return</span> tmp;<br>&#125;<br></code></pre></td></tr></table></figure><p><strong>2.逆序输出</strong><br>算法：求出低位，输出低位，再丢弃低位，重复执行直到n为0<br>这里关键是求低位的算法，用除十取余来得到低位，C代码如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ReverseOutput</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br><span class="hljs-keyword">if</span>(n == <span class="hljs-number">0</span>)<br>&#123;<br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"0\n"</span>);<br><span class="hljs-keyword">return</span>;<span class="hljs-comment">//提前结束该函数</span><br>&#125;<br><span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(n &lt; <span class="hljs-number">0</span>)<br>&#123;<br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"-"</span>);<br>n = -n;<br>&#125;<br><br><span class="hljs-keyword">while</span>(n != <span class="hljs-number">0</span>)<br>&#123;<br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>,n%<span class="hljs-number">10</span>);<br>n /= <span class="hljs-number">10</span>;<br>&#125;<br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"\n"</span>);<br>&#125;<br></code></pre></td></tr></table></figure><p><strong>3.顺序输出</strong><br>算法:得到高位,输出高位,丢弃高位,直到n为0，<br>这里关键是得到高位的算法，C代码如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">OrderOutput</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span><br><span class="hljs-function"></span>&#123;<br><span class="hljs-keyword">int</span> tmp = Count(n); <span class="hljs-comment">//得到n是几位数字</span><br><span class="hljs-keyword">int</span> power = (<span class="hljs-keyword">int</span>)<span class="hljs-built_in">pow</span>(<span class="hljs-number">10.0</span>, tmp - <span class="hljs-number">1</span>);<span class="hljs-comment">//获得高位</span><br><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; tmp; i++)<br>&#123;<br><span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, n / power);<span class="hljs-comment">//输出最高位</span><br>n %= power;<span class="hljs-comment">//丢弃最高位</span><br>power /= <span class="hljs-number">10</span>;<br>&#125;<br>&#125;<br></code></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> C语言 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+  
+  
+</search>
