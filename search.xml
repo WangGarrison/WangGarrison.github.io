@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>不使用第三个变量交换两个整数a-b的值</title>
+      <link href="/2020/05/21/%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E4%B8%AA%E5%8F%98%E9%87%8F%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0a-b%E7%9A%84%E5%80%BC/"/>
+      <url>/2020/05/21/%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E4%B8%AA%E5%8F%98%E9%87%8F%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0a-b%E7%9A%84%E5%80%BC/</url>
+      
+        <content type="html"><![CDATA[<p>通常交换两个整数a,b的值，要使用第三方变量temp，但是在一些笔试或面试中，要求<strong>不使用第三个变量来实现交换</strong>，下面总结三种方法。</p><h2 id="方法一：加法">方法一：加法</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">int</span> a = <span class="hljs-number">2</span>;<br><span class="hljs-keyword">int</span> b = <span class="hljs-number">5</span>;<br>a = a + b;<span class="hljs-comment">//a存储两数之和7</span><br>b = a - b;<span class="hljs-comment">//两数之和减去一个就是另一个，相当于b = 7-2，此时b已经变成最初a的值了</span><br>a = a - b;<span class="hljs-comment">//相当于a=7-2，a的值成为最初b的值</span><br></code></pre></td></tr></table></figure><h2 id="方法二：减法">方法二：减法</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">int</span> a = <span class="hljs-number">2</span>;<br><span class="hljs-keyword">int</span> b = <span class="hljs-number">5</span>;<br>a = a - b;<span class="hljs-comment">//a存储两数之差  a=2-5=-3</span><br>b = b + a;<span class="hljs-comment">//b加上a与b的差值即为最初a的值</span><br>a = b - a; <span class="hljs-comment">//b此时为最初a的值，减去差值即为最初b的值</span><br></code></pre></td></tr></table></figure><h2 id="方法三：异或">方法三：异或</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">int</span> a = <span class="hljs-number">2</span>;<br><span class="hljs-keyword">int</span> b = <span class="hljs-number">5</span>;<br>a = a ^ b;   <span class="hljs-comment">//a存储ab"异或结果"</span><br>b = a ^ b;  <span class="hljs-comment">//"异或结果"与b异或得到的是最初a的值</span><br>a = a ^ b;  <span class="hljs-comment">// "异或结果"与此时变成a的b异或得到的是最初b的值</span><br></code></pre></td></tr></table></figure><h2 id="注意！">注意！</h2><p>上述三种方法都没有常规方法( tmp = a ; a = b ; b = tmp; )好，并且以上三种方法不能实现自己和自己的交换，自己和自己交换结果都会是0<br>例如异或方法，当a和b都是a时，就变为(a = a ^ a ; a = a ^ a ; a = a ^ a)，结果是0</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> C语言 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Swap函数实现交换两个整数的值，易错总结</title>
       <link href="/2020/05/17/Swap%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0%E7%9A%84%E5%80%BC%EF%BC%8C%E6%98%93%E9%94%99%E6%80%BB%E7%BB%93/"/>
       <url>/2020/05/17/Swap%E5%87%BD%E6%95%B0%E5%AE%9E%E7%8E%B0%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0%E7%9A%84%E5%80%BC%EF%BC%8C%E6%98%93%E9%94%99%E6%80%BB%E7%BB%93/</url>
@@ -30,6 +49,12 @@
         <content type="html"><![CDATA[<p>更新博客后<br>hexo s 本地显示正常，但是hexo d提交线上后，用域名打开显示404</p><p><strong>解决办法</strong></p><p>hexo d后，登录Github找到自己博客的仓库，<br>点击settings<br><img src="https://img-blog.csdnimg.cn/20200516195546338.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="Github settings"><br>拉到底部将自己的域名填入，（虽然之前填过，但更新后有时要再填一次）<br><img src="https://img-blog.csdnimg.cn/20200516195808997.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="custom domain"><br>然后再点击rename，（虽然这没改动，但仍要点击一次）<br><img src="https://img-blog.csdnimg.cn/20200516195939782.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="click rename"><br>操作完之后就可以用域名打开网站了</p><p><img src="https://img-blog.csdnimg.cn/20200516200508342.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt=""></p>]]></content>
       
       
+      <categories>
+          
+          <category> Hexo </category>
+          
+      </categories>
+      
       
     </entry>
     
@@ -42,6 +67,12 @@
       
         <content type="html"><![CDATA[<p>今天win10预装的OneNote突然卡在了打开笔记本页面，一番重启之后无解，准备重装又担心之前的数据没有上传到云，于是手动备份。</p><p>OneNote本地存储的文件在C:\Users\wi\AppData\Local\Packages\Microsoft.Office.OneNote_8wekyb3d8bbwe\LocalState\AppData\Local\OneNote\16.0\AccessibilityCheckerIndex<br>该目录下成对出现的文件即为自己的笔记本，这些数据库文件为sqlite格式的db文件。使用SQLLiteSpy可以查看这些文件。<br>下载SQLLite数据库管理工具SQLLiteSpy<a href="http://www.winportal.com/sqlitespy" target="_blank" rel="noopener">下载地址</a>。<br>下载成功后解压缩，找到exe文件直接运行，在可视化窗口使用快捷键ctrl+F11打开数据库文件。使用该工具即可查看自己OneNote笔记本的数据结构。<br><img src="https://img-blog.csdnimg.cn/2020042609235772.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="SQLLite界面"><br>重装OneNote之前备份数据库文件，这样就不用担心数据的丢失了。</p>]]></content>
       
+      
+      <categories>
+          
+          <category> OneNote </category>
+          
+      </categories>
       
       
     </entry>
