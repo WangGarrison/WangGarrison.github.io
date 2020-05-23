@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>C语言动态内存分配malloc、calloc、realloc</title>
+      <link href="/2020/05/23/C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8Dmalloc%E3%80%81calloc%E3%80%81realloc/"/>
+      <url>/2020/05/23/C%E8%AF%AD%E8%A8%80%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8Dmalloc%E3%80%81calloc%E3%80%81realloc/</url>
+      
+        <content type="html"><![CDATA[<h2 id="动态内存"><strong>动态内存</strong></h2><p>根据需要动态创建需要的内存。例如根据变量创建数组，其内存区域在堆。这里简单提一下堆与栈</p><p><strong>栈</strong>：局部变量所在的内存区域，在Windows默认其大小为1M，系统自行管理其内存（即你不用管回收问题）</p><p><strong>堆</strong>：动态内存所在区域，默认大小为2G左右（不同平台有差别），程序管理内存，特别要注意内存释放</p><p>从以上栈与堆的大小可以知道，堆比栈大的多，所以动态内存还有一个使用场景，即需要创建大容量的数组时</p><h2 id="malloc、calloc、realloc"><strong>malloc、calloc、realloc</strong></h2><p><strong>malloc</strong>(字节数): 创建成功，函数返回一个指向分配起始地址的指针，失败返回NULL，内存数据为没有初始化的随机值</p><p><strong>calloc</strong>(单元个数，每个单元的字节数): 创建成功，函数返回一个指向分配起始地址的指针，失败返回NULL，内存数据初始化为0</p><p><strong>realloc</strong>(旧内存地址，新的内存字节大小): 用于修改动态内存的大小</p><p><strong>注意</strong>：这三个是C语言表中库中的函数，使用时要引用头文件stdlib.h，返回的地址都是void*类型，要强制类型转换成你所要用的类型</p><p><strong>malloc与calloc主要区别</strong>： 1.malloc内存数据未初始化，为随机值，calloc内存数据初始化为0,<br>2.malloc只有一个参数，calloc有两个参数，注意看他们的函数原型声明：void* malloc(unsigned size);    void* calloc(size_t nelem, size_t elsize)</p><h2 id="free"><strong>free</strong></h2><p><strong>free</strong>(地址): 释放动态创建的内存，不释放会发生内存泄漏<br>free在使用的时候在以下情况会崩溃：1.越界（动态分配的内存太小）2.动态内存指针发生移动  3.重复释放</p><p>解释一下第二条动态内存指针发生移动导致free失败的原因<br>free函数只有一个参数，即分配的内存的首地址，它只用这一个信息就知道要释放多大的内存，这是因为动态分配的内存的那个首地址记录了它后边的分配的空间的大小的信息，因此只传给free函数内存首地址即可，若这个地址（指针）发生了移动，free就会崩溃。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> C语言 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>不使用第三个变量交换两个整数a-b的值</title>
       <link href="/2020/05/21/%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E4%B8%AA%E5%8F%98%E9%87%8F%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0a-b%E7%9A%84%E5%80%BC/"/>
       <url>/2020/05/21/%E4%B8%8D%E4%BD%BF%E7%94%A8%E7%AC%AC%E4%B8%89%E4%B8%AA%E5%8F%98%E9%87%8F%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E6%95%B4%E6%95%B0a-b%E7%9A%84%E5%80%BC/</url>
