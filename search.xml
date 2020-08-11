@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Linux：目录组织结构、绝对路径与相对路径、目录相关命令</title>
+      <link href="/2020/08/11/Linux%EF%BC%9A%E7%9B%AE%E5%BD%95%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84%E3%80%81%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E4%B8%8E%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E3%80%81%E7%9B%AE%E5%BD%95%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/"/>
+      <url>/2020/08/11/Linux%EF%BC%9A%E7%9B%AE%E5%BD%95%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84%E3%80%81%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E4%B8%8E%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E3%80%81%E7%9B%AE%E5%BD%95%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Linux目录组织结构">Linux目录组织结构</h2><p>在Linux下面，所有的文件与目录都是由根目录开始的，根目录是所有文件与目录的源头，然后再一个一个的分支下来，像树枝状，如下图<br><img src="https://img-blog.csdnimg.cn/20200811104213517.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="目录树directory tree"><br>Linux的FHS（Filesystem Hierarchy Standard）给出了每个特定的目录下应该存放什么样的文件，FHS目的是希望让用户可以了解到已安装软件通常放置于哪个目录下</p><p><font color='red'><strong>/bin</strong></font>：存放常用命令（即二进制可执行程序），主要有：cat、ls、mkdir、tar、mount、mv、cp、bash等常用命令<br><font color='red'><strong>/etc</strong></font>：存放系统配置文件<br><font color='red'><strong>/home</strong></font>：所有普通用户的家目录，“~”代表目前这个用户的家目录<br><font color='red'><strong>/root</strong></font>：系统管理用户的家目录<br><font color='red'><strong>/usr</strong></font>：存放系统应用程序及文档，（usr全称UNIX Software Resource）<br><font color='red'><strong>/proc</strong></font>：虚拟文件系统目录，以进程为单位存储内存的映射，（proc全称process information pseudo-file system进程信息虚拟文件系统）<br><font color='red'><strong>/dev</strong></font>：存放设备文件<br><font color='red'><strong>/mnt</strong></font>：临时挂载点<br><font color='red'><strong>/lib</strong></font>：存放库文件<br><font color='red'><strong>/boot</strong></font>：系统内核及启动有关的文件<br><font color='red'><strong>/tmp</strong></font>：存放各种临时文件，是所有用户均可访问的地点<br><font color='red'><strong>/var</strong></font>：存放系统运行中常改变的文件，如系统日志</p><h2 id="绝对路径与相对路径">绝对路径与相对路径</h2><p>根据文件名写法的不同，将所谓的路径定义为绝对路径与相对路径<br><font color='red'><strong>绝对路径</strong></font>：由根目录(/)开始写起的文件名或目录名称，例如：/usr/local/src<br><font color='red'><strong>相对路径</strong></font>：相对于当前位置的路径，即从当前位置开始到指定位置的路径，<strong>‘.’代表当前位置，‘..’代表当前位置的上一层目录</strong>，例如：./main.c表示当前位置下的main.c文件</p><p>区分绝对路径和相对路径只需要看首字符，如果首字符是‘/’，则是绝对路径，其他的都是相对路径<br><strong>注意</strong>：在写程序（shell脚本）来管理系统的条件下，务必使用绝对路径，因为绝对路径的写法虽然比较麻烦，但是可以肯定的是这个写法是唯一的且正确的，若使用相对路径，则可能由于执行的工作环境不同导致一些问题的发生</p><h2 id="目录相关命令">目录相关命令</h2><p><font color='red'><strong>.</strong></font>：代表当前目录，例如./main.c当前目录下的main.c文件</p><p><font color='red'><strong>..</strong></font>：代表上一层目录，例如../test.c上一层目录下的test.c文件</p><p><font color='red'><strong>~</strong></font>：代表目前使用者身份的家目录，例如cd ~dmtsai等价于cd /home/dmtsai</p><p><font color='red'><strong>cd</strong></font>：change directory 切换目录，例如cd /usr/share</p><p><font color='red'><strong>pwd</strong></font>：print working directory 显示当前工作位置的绝对路径</p><p><font color='red'><strong>mkdir</strong></font>：make directory 建立一个新目录</p><p><font color='red'><strong>rmdir</strong></font>：remove directory 删除一个空目录，目录需要一层一层的删除才行，而且被删除的目录里面必定不能存在其他的目录或文件，即必须是空目录，如果要删除非空目录，要使用命令<strong>rmdir  -r  dirname</strong>，-r参数让它递归地去删除</p><p><font color='red'><strong>ls</strong></font>：查看文件或目录的信息，<br>用法：ls  路径，显示指定路径下的文件，如果不给路径，默认显示的是当前目录的文件<br>ls命令的选项与参数：<br>-a显示所有的文件，连同隐藏的文件（开头为 <strong>.</strong> 的文件）<br>-i         显示文件对应的inode节点号<br>-l         显示文件的详细信息，包含文件的属性与权限等数据（常用ls  -l也可简化为ll）</p><p><strong>参考书籍</strong><br>《鸟哥的Linux私房菜》第四版 第五章Linux的文件权限与目录配置</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>数据结构：删除单链表中p节点，时间复杂度O-1</title>
       <link href="/2020/07/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E5%88%A0%E9%99%A4%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%ADp%E8%8A%82%E7%82%B9%EF%BC%8C%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O-1/"/>
       <url>/2020/07/27/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E5%88%A0%E9%99%A4%E5%8D%95%E9%93%BE%E8%A1%A8%E4%B8%ADp%E8%8A%82%E7%82%B9%EF%BC%8C%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6O-1/</url>
