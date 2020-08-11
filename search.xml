@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Linux：文件系统、文件类型与文件权限</title>
+      <link href="/2020/08/11/Linux%EF%BC%9A%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E3%80%81%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/"/>
+      <url>/2020/08/11/Linux%EF%BC%9A%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E3%80%81%E6%96%87%E4%BB%B6%E7%B1%BB%E5%9E%8B%E4%B8%8E%E6%96%87%E4%BB%B6%E6%9D%83%E9%99%90/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Linux的文件系统">Linux的文件系统</h2><p>现在Linux大多采用ext4文件系统（Fourth extended filesystem），ext4是索引式的文件系统，以ext4文件系统格式化磁盘时，将磁盘划分成三个区：</p><p><strong>1.superblock（超级区块）</strong>：记录此文件系统的整体信息，包括inode区块的总量、使用量、剩余量，以及文件系统的格式与相关信息等；<br><strong>2.inode</strong>：很多inode节点，给每一个inode都分配一个编码，一个文件会有一个inode节点，在此inode中存储文件的属性信息以及存储文件内容的那些block号<br><strong>3.block（数据区块）</strong>：很多block，给每个block都分配了一个编号，每一个block用于存储文件真实内容，若文件太大时，会占用多个数据区块，一个block一般4K大小</p><h2 id="文件类型与文件权限">文件类型与文件权限</h2><p>在终端输入 ls  -l 查看文件的属性，显示如下图：<br><img src="https://img-blog.csdnimg.cn/20200811210956640.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><font color='red'><strong>第1栏文件类型：</strong></font>Linux下一切皆文件，Linux系统一共有五种文件类型，注意：Linux并不以文件的扩展名区分文件类型，Linux的五种文件类型如下：</p><p>普通文件：用符号 - 表示，例如.c、.cpp、.h、.txt等文件<br>目录文件：d<br>链接文件：l，类似于Windows上的快捷方式<br>管道文件：p，应用在进程间通信<br>设备文件：字符设备文件 c，块设备文件 b，套接字 s</p><p><font color='red'><strong>第2栏文件权限：</strong></font>第二列每三个字母代表一种用户类型的权限，一个文件将访问其的用户划分成三类，分别是所有者、组用户和其他用户，如下图所示：<br><img src="https://img-blog.csdnimg.cn/20200811212521303.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><font color='red'><strong>第3栏文件的链接数：</strong></font>普通文件：硬链接文件个数<br>目录文件：目录中一级子目录的个数<br><font color='red'><strong>第4栏文件的所有者</strong></font><br><img src="https://img-blog.csdnimg.cn/20200811212913500.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><font color='red'><strong>第5栏文件所属的组</strong></font><br><font color='red'><strong>第6栏文件的大小，单位字节</strong></font><br><font color='red'><strong>第7栏文件最后修改时间</strong></font><br><font color='red'><strong>第8栏文件名</strong></font></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux：目录组织结构、绝对路径与相对路径、目录相关命令</title>
       <link href="/2020/08/11/Linux%EF%BC%9A%E7%9B%AE%E5%BD%95%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84%E3%80%81%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E4%B8%8E%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E3%80%81%E7%9B%AE%E5%BD%95%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/"/>
       <url>/2020/08/11/Linux%EF%BC%9A%E7%9B%AE%E5%BD%95%E7%BB%84%E7%BB%87%E7%BB%93%E6%9E%84%E3%80%81%E7%BB%9D%E5%AF%B9%E8%B7%AF%E5%BE%84%E4%B8%8E%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84%E3%80%81%E7%9B%AE%E5%BD%95%E7%9B%B8%E5%85%B3%E5%91%BD%E4%BB%A4/</url>
