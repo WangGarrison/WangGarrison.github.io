@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Linux：gcc和g-的使用与区别</title>
+      <link href="/2020/08/18/Linux%EF%BC%9Agcc%E5%92%8Cg-%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8C%BA%E5%88%AB/"/>
+      <url>/2020/08/18/Linux%EF%BC%9Agcc%E5%92%8Cg-%E7%9A%84%E4%BD%BF%E7%94%A8%E4%B8%8E%E5%8C%BA%E5%88%AB/</url>
+      
+        <content type="html"><![CDATA[<h2 id="gcc与g-是什么">gcc与g++是什么</h2><p>gcc：是GCC中的GNU C Compiler（C 编译器）注意：GCC与gcc是两个东西</p><p>g++：是GCC中的GNU C++ Compiler（C++编译器）</p><p>GCC: GNU Compiler Collection(GNU 编译器集合)，它可以编译C、C++、JAV、Fortran、Pascal、Object-C、Ada等语言。</p><h2 id="gcc与g-区别">gcc与g++区别</h2><p><font color='red'>gcc和g++都可以编译c语言和c++</font></p><p>如果是 .c文件，gcc按照c语言的方式去编译，g++会按照c++的方式编译；如果是 .cpp文件，gcc和g++都会按照c++的方式去编译</p><p>gcc只会默认连接c库，不会连接c++库，而g++都会连接，gcc编译cpp文件时，必须手动连接c++的库（命令：gcc -o main main.cpp  -lstdc++）</p><h2 id="gcc-g-的使用">gcc/g++的使用</h2><p>gcc与g++使用方法相同，这里只以gcc为例</p><p>1、预编译</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -E **.c  <span class="hljs-comment">#执行命令后生成**.i文件</span><br></code></pre></td></tr></table></figure><p>预编译阶段：处理预编译指令，删除注释，宏替换</p><p>2、编译</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -S **.i  <span class="hljs-comment">#执行命令后默认生成一个**.s文件</span><br></code></pre></td></tr></table></figure><p>编译阶段：语法、词法分析，代码优化，汇总符号</p><p>3、汇编</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc -c **.s  <span class="hljs-comment">#执行命令后生成**.o文件，是可重定位的二进制文件</span><br></code></pre></td></tr></table></figure><p>汇编阶段：翻译成二进制，生成各个段，生成符号表</p><p>4、链接</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc **.o  <span class="hljs-comment">#默认生成一个a.out文件，a.out是可执行文件</span><br></code></pre></td></tr></table></figure><p>链接阶段：合并各个段，符号解析，符号重定位</p><p>上述命令可以加-o指定生成的文件名，o是output的缩写，例如：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">gcc **.o -o 自定义的文件名  <span class="hljs-comment">#指定生成的可执行文件名称</span><br></code></pre></td></tr></table></figure><p><strong>上述过程总结如下图</strong><br><img src="https://img-blog.csdnimg.cn/20200818203115154.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20200818204208939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux：进程相关的操作</title>
       <link href="/2020/08/15/Linux%EF%BC%9A%E8%BF%9B%E7%A8%8B%E7%9B%B8%E5%85%B3%E7%9A%84%E6%93%8D%E4%BD%9C/"/>
       <url>/2020/08/15/Linux%EF%BC%9A%E8%BF%9B%E7%A8%8B%E7%9B%B8%E5%85%B3%E7%9A%84%E6%93%8D%E4%BD%9C/</url>
