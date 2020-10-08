@@ -18,7 +18,7 @@ body {
   height: 8px;
 }
 *::-webkit-scrollbar-thumb {
-  background: #49b1f5;
+  background: #b22222;
 }
 *::-webkit-scrollbar-track {
   background-color: transparent;
@@ -1841,7 +1841,7 @@ blockquote footer cite:before {
   position: relative;
   z-index: 1;
   display: block;
-  background-color: #49b1f5;
+  background-color: #b22222;
   color: #fff;
   line-height: 1.6rem;
 }
@@ -1862,7 +1862,7 @@ blockquote footer cite:before {
   padding: 0 0.1rem;
 }
 #aside_content .card-tag-cloud a:hover {
-  color: #49b1f5 !important;
+  color: #b22222 !important;
 }
 #aside_content .card-recent-post .aside-recent-item {
   margin: 10px 0 -15px;
@@ -1915,7 +1915,7 @@ blockquote footer cite:before {
   -webkit-box-orient: vertical;
 }
 #aside_content .card-recent-post .aside-recent-item > .aside-recent-post > a .aside-post-title .aside-post_title:hover {
-  color: #49b1f5 !important;
+  color: #b22222 !important;
 }
 #aside_content .card-recent-post .aside-recent-item > .aside-recent-post > a .aside-post-title.no-aside-cover .aside-post_title {
   height: auto;
@@ -1939,7 +1939,7 @@ blockquote footer cite:before {
 #aside_content .card-archives ul.card-archive-list > .card-archive-list-item:hover,
 #aside_content .card-categories ul.card-category-list > .card-category-list-item:hover {
   padding: 0.15rem 0.85rem;
-  background-color: #49b1f5;
+  background-color: #b22222;
 }
 #aside_content .card-archives ul.card-archive-list > .card-archive-list-item a,
 #aside_content .card-categories ul.card-category-list > .card-category-list-item a {
@@ -2052,7 +2052,7 @@ blockquote footer cite:before {
   position: absolute;
   top: 0;
   left: 0;
-  background: #49b1f5;
+  background: #b22222;
   color: #fff;
   cursor: pointer;
   -webkit-transition: all 0.3s ease-out;
@@ -2080,7 +2080,7 @@ blockquote footer cite:before {
   margin-left: 0.45rem;
   width: 0.3rem;
   height: 0.3rem;
-  border: 0.15rem solid #49b1f5;
+  border: 0.15rem solid #b22222;
   border-radius: 0.3rem;
   background: transparent;
   content: '';
@@ -2122,7 +2122,7 @@ blockquote footer cite:before {
   bottom: 0;
   left: 0;
   z-index: -1;
-  background: #49b1f5;
+  background: #b22222;
   content: '';
   -webkit-transition-timing-function: ease-out;
   -moz-transition-timing-function: ease-out;
@@ -2204,7 +2204,7 @@ blockquote footer cite:before {
 }
 #footer {
   position: relative;
-  background: #49b1f5;
+  background: #b22222;
   background-attachment: local;
   background-position: bottom;
   -webkit-background-size: cover;
@@ -2229,7 +2229,7 @@ blockquote footer cite:before {
   cursor: pointer;
 }
 #footer-wrap a:hover {
-  color: #49b1f5;
+  color: #b22222;
   text-decoration: underline;
 }
 #footer-wrap .footer-separator {
@@ -2242,7 +2242,7 @@ blockquote footer cite:before {
 #nav {
   position: relative;
   width: 100%;
-  background-color: #49b1f5;
+  background-color: #b22222;
   background-attachment: local;
   background-position: center center;
   -webkit-background-size: cover;
@@ -2371,7 +2371,7 @@ blockquote footer cite:before {
   transition: all 0.3s ease-out;
 }
 #nav.post-bg #post-info #post-meta a:hover {
-  color: #49b1f5;
+  color: #b22222;
   text-decoration: underline;
 }
 #page-header {
@@ -2434,7 +2434,7 @@ blockquote footer cite:before {
 #page-header.fixed a:hover,
 #page-header.fixed #site-name:hover,
 #page-header.fixed .toggle-menu:hover {
-  color: #49b1f5;
+  color: #b22222;
 }
 #page-header.visible {
   -webkit-transition: all 0.5s;
@@ -2494,7 +2494,7 @@ blockquote footer cite:before {
   z-index: -1;
   width: 0;
   height: 3px;
-  background-color: #80c8f8;
+  background-color: #de5050;
   content: '';
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
@@ -2533,7 +2533,7 @@ blockquote footer cite:before {
   list-style: none;
 }
 #page-header .menus_items .menus_item .menus_item_child li:hover {
-  background: #49b1f5;
+  background: #b22222;
 }
 #page-header .menus_items .menus_item .menus_item_child li a {
   display: inline-block;
@@ -2698,7 +2698,7 @@ blockquote footer cite:before {
   width: 70%;
 }
 #mobile-sidebar #mobile-sidebar-menus .menus_items span:hover {
-  color: #49b1f5;
+  color: #b22222;
 }
 #mobile-sidebar #mobile-sidebar-menus .menus_items .menus-expand {
   position: absolute;
@@ -2859,7 +2859,7 @@ blockquote footer cite:before {
   -webkit-line-clamp: 2;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-title:hover {
-  color: #49b1f5 !important;
+  color: #b22222 !important;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap {
   font-size: 95%;
@@ -2890,7 +2890,7 @@ blockquote footer cite:before {
 }
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap a.article-meta__categories:hover,
 #recent-posts > .recent-post-item >.recent-post-info > .article-meta-wrap a.article-meta__tags:hover {
-  color: #49b1f5 !important;
+  color: #b22222 !important;
   text-decoration: underline;
 }
 #recent-posts > .recent-post-item >.recent-post-info > .content {
@@ -2950,7 +2950,7 @@ blockquote footer cite:before {
 .article-sort {
   margin-left: 0.5rem;
   padding-left: 1rem;
-  border-left: 2px solid #aadafa;
+  border-left: 2px solid #e05a5a;
 }
 .article-sort-title {
   position: relative;
@@ -2970,7 +2970,7 @@ blockquote footer cite:before {
   z-index: 1;
   width: 0.5rem;
   height: 0.5rem;
-  border: 0.25rem solid #49b1f5;
+  border: 0.25rem solid #b22222;
   border-radius: 0.5rem;
   background: #fff;
   content: '';
@@ -2988,7 +2988,7 @@ blockquote footer cite:before {
   z-index: 0;
   width: 0.1rem;
   height: 1.3rem;
-  background: #aadafa;
+  background: #e05a5a;
   content: '';
 }
 .article-sort-item {
@@ -3011,7 +3011,7 @@ blockquote footer cite:before {
   left: calc(-1rem - 17px);
   width: 0.3rem;
   height: 0.3rem;
-  border: 0.15rem solid #49b1f5;
+  border: 0.15rem solid #b22222;
   border-radius: 0.3rem;
   background: #fff;
   content: '';
@@ -3051,7 +3051,7 @@ blockquote footer cite:before {
   font-size: 1rem;
 }
 .article-sort-item.year:hover:before {
-  border-color: #49b1f5;
+  border-color: #b22222;
 }
 .article-sort-item.year:before {
   top: 0.7rem;
@@ -3075,7 +3075,7 @@ blockquote footer cite:before {
   -webkit-box-orient: vertical;
 }
 .article-sort-item__title:hover {
-  color: #49b1f5 !important;
+  color: #b22222 !important;
   -webkit-transform: translateX(20px);
   -moz-transform: translateX(20px);
   -o-transform: translateX(20px);
@@ -3339,7 +3339,7 @@ a {
   overflow-wrap: break-word;
 }
 a:hover {
-  color: #49b1f5;
+  color: #b22222;
 }
 a.fancybox {
   outline: none;
@@ -3451,9 +3451,9 @@ img {
   margin: 0.4rem 0.4rem 0.4rem 0;
   padding: 0 0.6rem;
   width: fit-content;
-  border: 1px solid #49b1f5;
+  border: 1px solid #b22222;
   border-radius: 0.6rem;
-  color: #49b1f5;
+  color: #b22222;
   font-size: 12px;
   cursor: pointer;
   -webkit-transition: all 0.2s ease-in-out;
@@ -3463,7 +3463,7 @@ img {
   transition: all 0.2s ease-in-out;
 }
 .layout_post .tag_share .post-meta__tags:hover {
-  background: #49b1f5;
+  background: #b22222;
   color: #fff;
 }
 .layout_post .tag_share .post_share {
@@ -3500,7 +3500,7 @@ img {
   width: 0.8rem;
   height: 0.8rem;
   border-radius: 0.8rem;
-  background: #49b1f5;
+  background: #b22222;
   content: '';
 }
 .layout_post .post-copyright:after {
@@ -3518,7 +3518,7 @@ img {
   box-shadow: 0 0 8px 0 rgba(232,237,250,0.6), 0 2px 4px 0 rgba(232,237,250,0.5);
 }
 .layout_post .post-copyright .post-copyright-meta {
-  color: #49b1f5;
+  color: #b22222;
   font-weight: bold;
 }
 .layout_post .post-copyright .post-copyright-info {
@@ -3532,7 +3532,7 @@ img {
   text-decoration: none;
 }
 #article-container a {
-  color: #99a9bf;
+  color: #9a9bf9;
 }
 #article-container a:hover {
   text-decoration: underline;
@@ -3654,7 +3654,7 @@ img {
   z-index: 1;
   display: inline-block;
   width: 100px;
-  background: #49b1f5;
+  background: #b22222;
   color: #fff;
   text-align: center;
   line-height: 36px;
@@ -3768,7 +3768,7 @@ img {
   margin-bottom: 2px;
   width: 30px;
   height: 30px;
-  background-color: #49b1f5;
+  background-color: #b22222;
   color: #fff;
   text-align: center;
   font-size: 16px;
@@ -4014,7 +4014,7 @@ img {
 #vcomment button {
   padding: 0.3rem 0.8rem;
   border-color: #fff;
-  background-color: #49b1f5;
+  background-color: #b22222;
   color: #fff;
   font-size: 0.7rem;
   -webkit-transition: all 0.3s;
@@ -4042,9 +4042,9 @@ img {
 }
 #vcomment .vat {
   padding: 0 0.8rem;
-  border: 1px solid #49b1f5;
+  border: 1px solid #b22222;
   border-radius: 5px;
-  color: #49b1f5;
+  color: #b22222;
   font-size: 0.7125rem;
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
@@ -4053,7 +4053,7 @@ img {
   transition: all 0.3s;
 }
 #vcomment .vat:hover {
-  background-color: #49b1f5;
+  background-color: #b22222;
   color: #fff;
 }
 .fireworks {
@@ -4272,7 +4272,7 @@ figure.gallery-group .gallery-group-name:after {
   z-index: 1;
   display: inline-block;
   padding: 0 1rem;
-  background: #49b1f5;
+  background: #b22222;
   color: #fff !important;
   text-align: center;
   cursor: pointer;
@@ -4918,11 +4918,11 @@ figure.gallery-group .gallery-group-name:after {
   transition: color 0.2s ease-in-out;
 }
 .search-dialog span.search-close-button:hover {
-  color: #49b1f5;
+  color: #b22222;
 }
 .search-dialog__title {
   padding: 0 0 0.7rem;
-  color: #49b1f5;
+  color: #b22222;
   font-size: 1rem;
   line-height: 1;
 }
@@ -4965,7 +4965,7 @@ figure.gallery-group .gallery-group-name:after {
   padding: 0.25rem 0.7rem;
   width: 100%;
   outline: none;
-  border: 2px solid #49b1f5;
+  border: 2px solid #b22222;
   border-radius: 2rem;
   background: #f6f8fa;
   font-size: 14px;
@@ -4985,7 +4985,7 @@ figure.gallery-group .gallery-group-name:after {
   left: 0;
   width: 0.3rem;
   height: 0.3rem;
-  border: 0.15rem solid #49b1f5;
+  border: 0.15rem solid #b22222;
   border-radius: 0.3rem;
   background: transparent;
   content: '';
@@ -5004,7 +5004,7 @@ figure.gallery-group .gallery-group-name:after {
   cursor: pointer;
 }
 #local-search .local-search__hit-item a:hover {
-  color: #49b1f5;
+  color: #b22222;
 }
 #local-search .local-search__hit-item .search-result {
   margin: 0 0 0.4rem;
