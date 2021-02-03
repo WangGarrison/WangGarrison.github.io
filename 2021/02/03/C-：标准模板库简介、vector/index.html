@@ -1,0 +1,310 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>C-：标准模板库简介、vector | WangGarrison</title><meta name="description" content="标准模板库简介  C++标准模板库(Standard Template Library，STL)是一个标准化的模板化的对象容器库，包含多种数据结构和算法，STL的核心包括以下三个组件:  容器类：容器类是管理序列的类，是容纳一组对象或对象集的类。通过容器类提供的成员函数，可以实现诸如向序列中插入元素，删除元素，查找元素等操作，这些成员函数通过返回迭代器来指定元素在容器中的位置 迭代器：迭代器是面向"><meta name="author" content="WangGarrison"><meta name="copyright" content="WangGarrison"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="C-：标准模板库简介、vector"><meta name="twitter:description" content="标准模板库简介  C++标准模板库(Standard Template Library，STL)是一个标准化的模板化的对象容器库，包含多种数据结构和算法，STL的核心包括以下三个组件:  容器类：容器类是管理序列的类，是容纳一组对象或对象集的类。通过容器类提供的成员函数，可以实现诸如向序列中插入元素，删除元素，查找元素等操作，这些成员函数通过返回迭代器来指定元素在容器中的位置 迭代器：迭代器是面向"><meta name="twitter:image" content="http://wanggarrison.top/img/1index-bg.png"><meta property="og:type" content="article"><meta property="og:title" content="C-：标准模板库简介、vector"><meta property="og:url" content="http://wanggarrison.top/2021/02/03/C-%EF%BC%9A%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93%E7%AE%80%E4%BB%8B%E3%80%81vector/"><meta property="og:site_name" content="WangGarrison"><meta property="og:description" content="标准模板库简介  C++标准模板库(Standard Template Library，STL)是一个标准化的模板化的对象容器库，包含多种数据结构和算法，STL的核心包括以下三个组件:  容器类：容器类是管理序列的类，是容纳一组对象或对象集的类。通过容器类提供的成员函数，可以实现诸如向序列中插入元素，删除元素，查找元素等操作，这些成员函数通过返回迭代器来指定元素在容器中的位置 迭代器：迭代器是面向"><meta property="og:image" content="http://wanggarrison.top/img/1index-bg.png"><meta property="article:published_time" content="2021-02-03T08:35:30.997Z"><meta property="article:modified_time" content="2021-02-03T09:04:39.680Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script><!-- hexo-inject:begin --><!-- hexo-inject:end -->var autoChangeMode = 'false'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://wanggarrison.top/2021/02/03/C-%EF%BC%9A%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93%E7%AE%80%E4%BB%8B%E3%80%81vector/"><link rel="prev" title="C-：函数模板、类模板" href="http://wanggarrison.top/2021/02/03/C-%EF%BC%9A%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E3%80%81%E7%B1%BB%E6%A8%A1%E6%9D%BF/"><link rel="next" title="C-：运算符重载" href="http://wanggarrison.top/2021/02/03/C-%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/"><link rel="stylesheet" href="/font"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: undefined,
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: false,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="/css/iconfont.css"><link rel="stylesheet" href="/css/shouyetubiao.css"><meta name="generator" content="Hexo 4.2.1"><!-- hexo-inject:begin --><!-- hexo-inject:end --><link rel="stylesheet" href="/css/prism.css" type="text/css"></head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">48</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-shouye"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-dangan"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei-copy"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwo"></i><span> About</span></a></div></div></div></div><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content" style="overflow: hidden;"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#标准模板库简介"><span class="toc-number">1.</span> <span class="toc-text">标准模板库简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#容器类"><span class="toc-number">2.</span> <span class="toc-text">容器类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vector容器"><span class="toc-number">3.</span> <span class="toc-text">vector容器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#vector的构造函数"><span class="toc-number">3.1.</span> <span class="toc-text">vector的构造函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector元素的访问"><span class="toc-number">3.2.</span> <span class="toc-text">vector元素的访问</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector迭代器"><span class="toc-number">3.3.</span> <span class="toc-text">vector迭代器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#迭代器失效问题"><span class="toc-number">3.3.1.</span> <span class="toc-text">迭代器失效问题</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector容量"><span class="toc-number">3.4.</span> <span class="toc-text">vector容量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector修改器"><span class="toc-number">3.5.</span> <span class="toc-text">vector修改器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector容器成员类型"><span class="toc-number">3.6.</span> <span class="toc-text">vector容器成员类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#vector中reserve-resize-assign的区别"><span class="toc-number">3.7.</span> <span class="toc-text">vector中reserve,resize,assign的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#reserve"><span class="toc-number">3.7.1.</span> <span class="toc-text">reserve</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#resize"><span class="toc-number">3.7.2.</span> <span class="toc-text">resize</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#assign"><span class="toc-number">3.7.3.</span> <span class="toc-text">assign</span></a></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/img/1index-bg.png)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">WangGarrison</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-shouye"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-dangan"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw iconfont icon-fenlei-copy"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-guanyuwo"></i><span> About</span></a></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">C-：标准模板库简介、vector</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2021-02-03 16:35:30"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2021-02-03</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2021-02-03 17:04:39"><i class="fa fa-history" aria-hidden="true"></i> Updated 2021-02-03</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/C/">C++</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>Word count:</span><span class="word-count">3.2k</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="标准模板库简介">标准模板库简介</h2>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><hr>
+<p>C++标准模板库(Standard Template Library，STL)是一个标准化的模板化的对象容器库，包含多种数据结构和算法，STL的核心包括以下三个组件:</p>
+<ul>
+<li>容器类：容器类是管理序列的类，是容纳一组对象或对象集的类。通过容器类提供的成员函数，可以实现诸如向序列中插入元素，删除元素，查找元素等操作，这些成员函数通过返回迭代器来指定元素在容器中的位置</li>
+<li>迭代器：迭代器是面向对象版本的指针，它可以用于遍历对象集合的元素。这些集合可能是容器，也可能是容器的子集</li>
+<li>算法：算法作用于容器。它们提供了执行各种操作的方式，包括对容器内容执行初始化、排序、搜索和转换等操作</li>
+</ul>
+<p>这三个组件都带有丰富的预定义函数，帮助我们通过简单的方式处理复杂的任务</p>
+<h2 id="容器类">容器类</h2>
+<hr>
+<p>容器类分为三大类：顺序容器、关联容器和容器适配器<br>
+<img src="https://img-blog.csdnimg.cn/20201109144216402.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+其中顺序容器与关联容器称为第一类容器。另外有四种容器称为近容器：C语言风格数组、字符串string、操作1/0标志值的bitset和进行高速数学矢量运算的valarray，近容器虽然提供与第一类容器类似的功能，但没有第一类容器的全部功能</p>
+<p>STL为容器提供类似的接口，许多基本操作是所有容器都适用的</p>
+<p><strong>所有标准容器库共有的函数有如下</strong>：<br>
+<img src="https://img-blog.csdnimg.cn/2020110915031627.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+<strong>只在第一类容器中的函数有如下</strong>：<br>
+<img src="https://img-blog.csdnimg.cn/20201109151021895.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h2 id="vector容器">vector容器</h2>
+<hr>
+<blockquote>
+<p>参考：<a href="https://zh.cppreference.com/w/cpp/container/vector" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/container/vector</a></p>
+</blockquote>
+<p>vector(向量)是一个封装了动态大小数组的顺序容器（Sequence Container）。跟任意其它类型容器一样，它能够存放各种类型的对象。可以简单的认为，向量是一个能够存放任意类型的动态数组。</p>
+<p>vector具有如下特点：</p>
+<ol>
+<li>vector是表示可以改变大小的数组的序列容器</li>
+<li>vector与数组一样，元素使用连续的存储空间，就可以使用常规指针，指向其元素，使用偏移量来访问存储空间中的元素</li>
+<li>vector与数组不同的是，vector的大小可以动态变化，容器会自动扩容存储空间</li>
+<li>vector使用一个动态分配的连续存储空间存储元素。在插入新元素时存储空间可能需要重新分配，以便增大大小，这意味着分配一个新存储空间要将所有元素移动到其中。就处理时间而言，这是一项相对昂贵的任务，因此，向量在扩容时有时会预留一定大小的存储空间，这样vector不必每次向容器中添加元素都重新分配，即vector容器可以额外分配一些存储空间以适应可能的增长，因此容器的实际容量可能大于严格需要的存储容量</li>
+<li>vector与C数组相比，向量消耗更多的内存，以换取管理存储和高效动态增长的能力</li>
+<li>与其他动态序列容器(deques, list和forward_list)相比，vector可以相对高效地对元素进行访问、删除和尾部添加，但对于在末尾以外的位置插入或删除元素，其性能较差</li>
+</ol>
+<p>vector的使用方式如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ar = &#123;<span class="number">12</span>, <span class="number">23</span>, <span class="number">34</span>, <span class="number">45</span>, <span class="number">56</span>&#125;;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = ar.begin();</span><br><span class="line">	<span class="keyword">for</span>(;it != ar.end();++it)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;*it&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>vector也可以同C数组那样去访问元素，如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ar = &#123;<span class="number">12</span>, <span class="number">23</span>, <span class="number">34</span>, <span class="number">45</span>, <span class="number">56</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span> n = ar.size();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt; n; ++i)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span>&lt;&lt;arr[i]&lt;&lt;<span class="built_in">endl</span>;<span class="comment">//也可以：cout&lt;&lt;ar.at(i)&lt;&lt;endl;</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="vector的构造函数">vector的构造函数</h3>
+<p><img src="https://img-blog.csdnimg.cn/20201109192118240.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+所以在使用vector的时候，有如下多种初始化方式：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> arr[] = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">	<span class="keyword">int</span> n = <span class="keyword">sizeof</span>(arr)/<span class="keyword">sizeof</span>(arr[<span class="number">0</span>]);</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; veca;</span><br><span class="line">	<span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">vecb</span><span class="params">(<span class="number">10</span>)</span></span>;<span class="comment">//给vecb10个整型的初始值</span></span><br><span class="line">	<span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">vecc</span><span class="params">(<span class="number">10</span>,<span class="number">23</span>)</span></span>;<span class="comment">//给vecb 10个23</span></span><br><span class="line">	<span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">vecd</span><span class="params">(arr,arr+n)</span></span>;<span class="comment">//用ar到ar+n地址之间的数据去初始化vecd</span></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vecf = &#123;<span class="number">12</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">43</span>,<span class="number">4</span>,<span class="number">6</span>&#125;;<span class="comment">//C11标准</span></span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vecg &#123;<span class="number">12</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">43</span>,<span class="number">4</span>,<span class="number">6</span>&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="vector元素的访问">vector元素的访问</h3>
+<p><img src="https://img-blog.csdnimg.cn/20201110132123588.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>访问元素示例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec = &#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span> &#125;;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> a = vec.at(<span class="number">1</span>); <span class="comment">//访问下标为1的元素</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> b = vec[<span class="number">1</span>];<span class="comment">//访问下标为1的元素</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> c = vec.front();<span class="comment">//访问第一个元素</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> d = vec.back();<span class="comment">//访问最后一个元素</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span>* e = vec.data();<span class="comment">//返回指向容器中第一个元素的指针</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20201110133440199.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="vector迭代器">vector迭代器</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">迭代函数</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><font color='blue'>iterator</font> begin()</td>
+<td style="text-align:left">返回指向起始的迭代器</td>
+</tr>
+<tr>
+<td style="text-align:left"><font color='blue'>iterator</font> end()</td>
+<td style="text-align:left">返回指向末尾的迭代器</td>
+</tr>
+<tr>
+<td style="text-align:left"><font color='blue'>reverse_iterator </font> rbegin()</td>
+<td style="text-align:left">返回指向起始的逆向迭代器</td>
+</tr>
+<tr>
+<td style="text-align:left"><font color='blue'>reverse_iterator</font> rend()</td>
+<td style="text-align:left">返回指向末尾的逆向迭代器</td>
+</tr>
+</tbody>
+</table>
+<p><img src="https://img-blog.csdnimg.cn/2020110919414911.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+正向迭代器例：<br>
+<img src="https://img-blog.csdnimg.cn/20201109152012598.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+逆向迭代器例：<br>
+<img src="https://img-blog.csdnimg.cn/20201109200722156.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+正向迭代器与逆向迭代器都分为普通迭代器与常性迭代器，普通迭代器不但可以读值也可以改值，而常性迭代器就只可以读取容器里元素的值但是不能改变容器里元素的值</p>
+<p>迭代器有越界检查，一旦越界就会抛出异常，但C数组里指针并没有这个特性，所以迭代器比指针更安全</p>
+<h4 id="迭代器失效问题">迭代器失效问题</h4>
+<p>对于如下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;<span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		vec.push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = vec.begin();</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;*it&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	vec.insert(it,<span class="number">100</span>);<span class="comment">//it位置前插入100</span></span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;*it&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>第二个cout会输出失败，因为在插入元素过后，迭代器it就失效了。如下图，在插入元素的时候，可能原来空间不够用，vector会新开一个空间来存储元素，但是it迭代器仍旧迭代的是旧的那个空间，所以it迭代器已然失效，输出它迭代的内容就会失败<br>
+<img src="https://img-blog.csdnimg.cn/2020111019011126.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+注意：插入数据的时候，容器空间可能够用，系统并未开空间，但是迭代器仍然失效，因为用户并不清除插入数据的时候系统有没有增空间，为了安全性，只要插入数据或调用了push_back或pop_back，迭代器就会失效，所以在使用完这几个函数之后，要更新迭代器</p>
+<h3 id="vector容量">vector容量</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">容量函数</th>
+<th style="text-align:left">功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><font color='blue'>bool</font> empty() <font color='blue'>const</font></td>
+<td style="text-align:left">检查容器是否为空</td>
+</tr>
+<tr>
+<td style="text-align:left"><font color='LightSeaGreen'>size_type </font> size() <font color='blue'>const</font></td>
+<td style="text-align:left">返回容纳的元素数</td>
+</tr>
+<tr>
+<td style="text-align:left"><font color='LightSeaGreen'>size_type</font> max_size() <font color='blue'>const</font></td>
+<td style="text-align:left">返回可容纳的最大元素数</td>
+</tr>
+<tr>
+<td style="text-align:left"><font color='blue'>void</font> reserve(<font color='LightSeaGreen'>size_type </font>new_cap)</td>
+<td style="text-align:left">预留存储空间</td>
+</tr>
+<tr>
+<td style="text-align:left"><font color='blue'>void</font> capacity() <font color='blue'>cosnt</td>
+<td style="text-align:left">返回当前容器的容量</td>
+</tr>
+<tr>
+<td style="text-align:left"><font color='blue'>void</font> shrink_to_fit()</td>
+<td style="text-align:left">通过释放未使用的内存减少内存的开销</td>
+</tr>
+</tbody>
+</table>
+<p>vector容器可以额外分配一些存储空间以适应可能的增长，因此容器的实际容量可能大于严格需要的存储容量, 如下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		vec.push_back(i + <span class="number">10</span>);</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt;<span class="string">"size:  "</span>&lt;&lt; vec.size() &lt;&lt; <span class="string">"\t"</span> &lt;&lt;<span class="string">"capacity:  "</span>&lt;&lt; vec.capacity() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20201110115848745.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+运行结果中，容量的值因为会预留存储空间所以会大于等于当前元素个数</p>
+<blockquote>
+<p>关于max_size函数，如下代码，分别计算出对于int型和double型的可容纳的最大元素个数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line">&gt;<span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line">&gt;<span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line">&gt;<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function">&gt;</span>&#123;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ivec;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">double</span>&gt; dvec;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"int: "</span>&lt;&lt;ivec.max_size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="string">"double: "</span>&lt;&lt;dvec.max_size()&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&gt;&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20201110120924844.png#pic_center" alt="在这里插入图片描述"><br>
+max_size函数返回的结果其实是STL认为堆区的可分配存储空间的大小除以元素类型的大小，STL认为堆区有4G空间可分配（其实达不到4G），4G/4B = 1073741824, 4G/8B = 536870912<br>
+其实给C进程的虚拟地址空间有4G，堆区只占一部分（2G左右），示意图如下：<br>
+<img src="https://img-blog.csdnimg.cn/20201110122254132.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+</blockquote>
+<h3 id="vector修改器">vector修改器</h3>
+<p><img src="https://img-blog.csdnimg.cn/20201109153356528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+clear函数只清楚容器里的元素，并不会改变容器的容量，如下代码：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		vec.push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"size: "</span> &lt;&lt; vec.size() &lt;&lt;<span class="string">"\t"</span>&lt;&lt; <span class="string">"capacity: "</span> &lt;&lt; vec.capacity() &lt;&lt; <span class="built_in">endl</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	</span><br><span class="line">	vec.clear();  </span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"After clear:"</span> &lt;&lt; <span class="built_in">endl</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"size: "</span> &lt;&lt; vec.size() &lt;&lt; <span class="string">"\t"</span>&lt;&lt;<span class="string">"capacity: "</span> &lt;&lt; vec.capacity() &lt;&lt; <span class="built_in">endl</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果：clear过后，元素个数为0了，容量不变<br>
+<img src="https://img-blog.csdnimg.cn/20201110123413440.png#pic_center" alt="在这里插入图片描述"><br>
+但是对于shrink_to_fit函数，它会压缩空间至适当尺寸，容器的容量也会跟着减少，例如下代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</span><br><span class="line">	&#123;</span><br><span class="line">		vec.push_back(i);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"size: "</span> &lt;&lt; vec.size() &lt;&lt;<span class="string">"\t"</span>&lt;&lt; <span class="string">"capacity: "</span> &lt;&lt; vec.capacity() &lt;&lt; <span class="built_in">endl</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	vec.shrink_to_fit(); </span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"After shrink_to_fit:"</span> &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"size: "</span> &lt;&lt; vec.size() &lt;&lt; <span class="string">"\t"</span> &lt;&lt; <span class="string">"capacity: "</span> &lt;&lt; vec.capacity() &lt;&lt; <span class="built_in">endl</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果如下：<br>
+<img src="https://img-blog.csdnimg.cn/20201110124306225.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>
+shrink_to_fit会回收容器多余的空间，使得容器容量与元素个数相匹配<br>
+注意：过多地调用shrink_to_fit会产生多的内存碎片</p>
+<p>insert函数的使用：<br>
+<img src="https://img-blog.csdnimg.cn/20201110130034944.png#pic_center" alt="在这里插入图片描述"><br>
+insert函数例：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">ForwardPrint</span>(<span class="title">const</span> <span class="title">vector</span>&lt;T&gt; &amp; <span class="title">vec</span>)//打印<span class="title">vec</span>里的元素</span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="string">"size:  "</span> &lt;&lt; vec.size() &lt;&lt; <span class="string">"\t"</span> &lt;&lt; <span class="string">"capacity: "</span> &lt;&lt; vec.capacity() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	<span class="keyword">typename</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::const_iterator it = vec.begin();</span><br><span class="line">	<span class="keyword">for</span> (; it != vec.end(); ++it)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; *it &lt;&lt; <span class="string">" "</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; vec = &#123; <span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span> &#125;;</span><br><span class="line">	<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = vec.begin();</span><br><span class="line">	vec.insert(it, <span class="number">10</span>);<span class="comment">//it位置前插入10</span></span><br><span class="line">	<span class="comment">//vec.insert(it,10,23); //it位置前插入10个23</span></span><br><span class="line">	<span class="comment">//vec.insert(it,ar,ar+n);//it位置前插入数组ar到ar+n的元素</span></span><br><span class="line">	<span class="comment">//vec.insert(it,&#123;2,3,5,7,8,212,4&#125;);//it位置前插入给出的列表</span></span><br><span class="line">	ForwardPrint(vec);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/20201110125719529.png#pic_center" alt="在这里插入图片描述"><br>
+erase函数的使用：<br>
+<img src="https://img-blog.csdnimg.cn/2020111013061773.png#pic_center" alt="在这里插入图片描述"></p>
+<h3 id="vector容器成员类型">vector容器成员类型</h3>
+<p><img src="https://img-blog.csdnimg.cn/20201110133807217.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>vector定义二维数组：<code>vector&lt;vector&lt;int&gt;&gt; arr;</code></p>
+<h3 id="vector中reserve-resize-assign的区别">vector中reserve,resize,assign的区别</h3>
+<h4 id="reserve">reserve</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">reserve</span><span class="params">(size_type n)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>reserve函数用来给vector预分配存储区大小，即capacity的值，但是没有给这段内存进行初始化。reserve的参数n是推荐预分配内存的大小，实际分配的可能等于或大于这个值。</p>
+<p>当调用函数时，n的值如果大于capacity的值，就会重新分配内存，使得容量大于n，这样，当调用push_back函数使得size超过原来默认分配的capacity值时避免了内存重分配开销</p>
+<p>需要注意的是：reserve函数分配出来的内存空间未初始化对象，只是表示vector可以利用这部分空间，但vector不能有效访问这些内存空间，如果访问就会出现越界现象，导致程序崩溃</p>
+<h4 id="resize">resize</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">resize</span><span class="params">(<span class="keyword">const</span> size_type Newsize)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">resize</span><span class="params">(<span class="keyword">const</span> size_type Newsize, <span class="keyword">const</span> T &amp; val)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>resize函数重新分配大小，并且创建对象。</p>
+<p>当Newsize小于当前size()值的时候，vector首先会减少size()值保存前Newsize个元素，然后将超出Newsize的元素删除（remove and destory），但是容器容量并未减少，仍是原来的容量，如下图：<br>
+<img src="https://img-blog.csdnimg.cn/20201110183652516.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2h1aWZhZ3VhbmdkZW1hbw==,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>当Newsize大于当前size()值的时候，vector会插入相应数量的元素使得size()的值达到Newsize，并对这些元素进行初始化，如果调用上面的第二个resize函数，指定val，vector会用val去初始化这些新插入的元素</p>
+<p>当Newsize大于capacity()值的时候，会自动重新分配内存存储空间</p>
+<h4 id="assign">assign</h4>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">assign</span><span class="params">(size_type n, <span class="keyword">const</span> T &amp; value)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">assign</span><span class="params">(Input first, Input last)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>assign函数是将n个值为value的元素赋值到vector容器中，或者将first到last区间的元素赋值到当前vector容器中，这个容器会清除掉vector中以前的内容</p>
+<p>这三个函数都有增加容量的能力，但没有减少容量的能力，只有shrink_to_fit才有减少容量的能力</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reserve</td>
+<td>预分配空间，未初始化</td>
+</tr>
+<tr>
+<td>resize</td>
+<td>重新调整空间大小，会初始化空间</td>
+</tr>
+<tr>
+<td>assign</td>
+<td>清除掉以前内容，放置新内容</td>
+</tr>
+</tbody>
+</table>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">WangGarrison</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="http://wanggarrison.top/2021/02/03/C-%EF%BC%9A%E6%A0%87%E5%87%86%E6%A8%A1%E6%9D%BF%E5%BA%93%E7%AE%80%E4%BB%8B%E3%80%81vector/">http://wanggarrison.top/2021/02/03/C-：标准模板库简介、vector/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post_share"><div class="addtoany"><div class="a2a_kit a2a_kit_size_32 a2a_default_style"><a class="a2a_button_facebook"></a><a class="a2a_button_twitter"></a><a class="a2a_button_wechat"></a><a class="a2a_button_sina_weibo"></a><a class="a2a_button_email"></a><a class="a2a_dd" href="https://www.addtoany.com/share" target="_blank" rel="noopener"></a></div></div><script async="async" src="https://static.addtoany.com/menu/page.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2021/02/03/C-%EF%BC%9A%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E3%80%81%E7%B1%BB%E6%A8%A1%E6%9D%BF/"><img class="prev_cover" src="/img/1index-bg.png" onerror="onerror=null;src='/img/1index-bg.png'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">C-：函数模板、类模板</div></div></a></div><div class="next-post pull_right"><a href="/2021/02/03/C-%EF%BC%9A%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/"><img class="next_cover" src="/img/1index-bg.png" onerror="onerror=null;src='/img/1index-bg.png'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">C-：运算符重载</div></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> Comment</span></div><div class="vcomment" id="vcomment"></div><script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script><script>var requestSetting = function (from,set) {
+  var from = from
+  var setting = set.split(',').filter(function(item){
+  return from.indexOf(item) > -1
+  });
+  setting = setting.length == 0 ? from :setting;
+  return setting
+}
+
+var guestInfo = requestSetting(['nick','mail','link'],'nick,mail')
+var requiredFields = requestSetting(['nick','mail','link'],'nick,mail')
+
+window.valine = new Valine({
+  el:'#vcomment',
+  appId: 'wRBaqYsEc12U7sIngUG9fsqw-gzGzoHsz',
+  appKey: 'W8z4NsMU9uPUGmvT4k38nLwV',
+  notify: false,
+  verify: false,
+  placeholder: '留言支持MarkDown语法...',
+  avatar: 'retro',
+  meta: guestInfo,
+  pageSize: '10',
+  lang: 'zh-CN',
+  recordIP: false,
+  serverURLs: '',
+  emojiCDN: '',
+  emojiMaps: "",
+  enableQQ: false,
+  requiredFields: requiredFields
+});</script></div></article></main><footer id="footer" style="background-image: url(/img/1index-bg.png)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2021 By WangGarrison</div><div class="framework-info"><span>Driven </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="Scroll to comment"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="Table of Contents" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="/js/search/local-search.js"></script><script src="https://cdn.jsdelivr.net/gh/lete114/CDN/Sum/sakura.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginModelPath":"assets/","tagMode":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false,"pluginJsPath":"lib/","pluginRootPath":"live2dw/"});</script><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
